@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    id="cordova-plugin-vr-view"
+    version="2.0.0">
+
+    <name>VR View</name>
+
+    <js-module src="www/vrview.js" name="vrview">
+        <clobbers target="VrView" />
+    </js-module>
+
+    <platform name="android">
+    
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="VrView">
+                <param name="android-package" value="it.tangodev.cordovapluginvrview.VrView"/>
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity
+                android:name="it.tangodev.cordovapluginvrview.VrVideoActivity"
+                android:theme="@android:style/Theme.DeviceDefault.NoActionBar"></activity>
+            <activity
+                android:name="it.tangodev.cordovapluginvrview.VrPanoramaActivity"
+                android:theme="@android:style/Theme.DeviceDefault.NoActionBar"></activity>
+        </config-file>
+
+        <edit-config file="AndroidManifest.xml" target="/manifest/application" mode="merge">
+            <application android:largeHeap="true"
+             android:allowBackup="true"
+                    android:backupAgent="cordova.plugin.cloudsettings.BackupAgentHelper"
+                    android:fullBackupOnly="true"
+                    android:fullBackupContent="@xml/backup_rules" />
+        </edit-config>
+
+        <edit-config file="AndroidManifest.xml" target="/manifest" mode="merge">
+            <manifest xmlns:tools="http://schemas.android.com/tools" />
+        </edit-config>
+
+        <!--<edit-config file="AndroidManifest.xml" target="/manifest/uses-sdk" mode="merge">
+            <uses-sdk tools:overrideLibrary="com.google.vr.widgets.video,com.google.vr.widgets.pano,com.google.vr.widgets.common" />
+        </edit-config>-->
+
+        <source-file src="src/android/java/it/tangodev/cordovapluginvrview/VrView.java" target-dir="src/it/tangodev/cordovapluginvrview/"/>
+        <source-file src="src/android/java/it/tangodev/cordovapluginvrview/VrVideoActivity.java" target-dir="src/it/tangodev/cordovapluginvrview/"/>
+        <source-file src="src/android/java/it/tangodev/cordovapluginvrview/VrPanoramaActivity.java" target-dir="src/it/tangodev/cordovapluginvrview/"/>
+        <source-file src="src/android/java/it/tangodev/cordovapluginvrview/Utils.java" target-dir="src/it/tangodev/cordovapluginvrview/"/>
+
+        <resource-file src="src/android/res/layout/vr_video_activity_layout.xml" target="res/layout/vr_video_activity_layout.xml" />
+        <resource-file src="src/android/res/layout/vr_panorama_activity_layout.xml" target="res/layout/vr_panorama_activity_layout.xml" />
+        <resource-file src="src/android/res/layout/vr_loading_indicator_layout.xml" target="res/layout/vr_loading_indicator_layout.xml" />
+        <resource-file src="src/android/res/layout/vr_pause_indicator_layout.xml" target="res/layout/vr_pause_indicator_layout.xml" />
+        <resource-file src="src/android/res/drawable/ic_play_white_48dp.png" target="res/drawable/ic_play_white_48dp.png" />
+
+        <framework src="src/android/extra.gradle" custom="true" type="gradleReference" />
+		<framework src="com.google.vr:sdk-videowidget:1.60.0" />
+        <framework src="com.google.vr:sdk-panowidget:1.60.0" />
+        <framework src="com.github.rahatarmanahmed:circularprogressview:2.5.0" />
+    </platform>
+
+    <platform name="ios">
+        <dependency id="cordova-plugin-cocoapod-support" />
+
+        <pods-config ios-min-version="8.0" uses-frameworks="true"/>
+
+        <config-file target="config.xml" parent="/*">
+            <feature name="VrView">
+                <param name="ios-package" value="VrView" onload="true" />
+            </feature>
+        </config-file>
+
+        <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
+            <string>Used to scan QR codes</string>
+        </config-file>
+
+        <header-file src="src/ios/VrView.h" />
+        <source-file src="src/ios/VrView.m" />
+        <header-file src="src/ios/VrControllerViewController.h" />
+        <source-file src="src/ios/VrControllerViewController.m" />
+        <header-file src="src/ios/VideoVrVC.h" />
+        <source-file src="src/ios/VideoVrVC.m" />
+        <header-file src="src/ios/PanoramaVrVC.h" />
+        <source-file src="src/ios/PanoramaVrVC.m" />
+
+        <resource-file src="src/ios/play.png" />
+
+        <pod id="GVRSDK" version="1.60.0" />
+    </platform>
+
+</plugin>
