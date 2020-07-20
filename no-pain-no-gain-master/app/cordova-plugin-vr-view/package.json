@@ -1,0 +1,19 @@
+{
+  "name": "cordova-plugin-vr-view",
+  "version": "2.0.0",
+  "description": "Cordova plugin VR View by TangoDev",
+  "cordova": {
+    "id": "cordova-plugin-vr-view",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "TangoDev",
+  "license": "UNLICENSED"
+}

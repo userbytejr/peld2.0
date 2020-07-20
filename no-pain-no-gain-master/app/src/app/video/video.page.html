@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>PELD-ELPA</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card *ngFor="let video of videos">
+    <ion-item>
+      <ion-label>{{ video.items[0].snippet.title }}</ion-label>
+    </ion-item>
+
+    <div (click)="watch(video.items[0].id)" class="thumbnail-wrapper">
+      <img [src]="video.items[0].snippet.thumbnails.standard.url"/>
+      <ion-icon name="play-circle" color="light" style="zoom:4.0;"></ion-icon>
+    </div>
+
+    <ion-card-content>
+      {{ video.items[0].snippet.publishedAt | date:'short' }}
+    </ion-card-content>
+  </ion-card>
+  
+</ion-content>
